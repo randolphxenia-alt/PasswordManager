@@ -7,7 +7,8 @@ import java.security.MessageDigest;
 
 /**
  * Хеширование мастер-паролей пользователей алгоритмом PBKDF2-HMAC-SHA256
- * со случайной солью (параметры соответствуют рекомендациям OWASP).
+ * со случайной солью. Число итераций (600 000) соответствует рекомендации
+ * OWASP Password Storage Cheat Sheet для PBKDF2-HMAC-SHA256.
  * <p>
  * Результат хранится одной строкой формата {@code соль:хеш}.
  */
@@ -17,7 +18,7 @@ public final class PasswordHasher {
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
 
     /** Количество итераций PBKDF2: замедляет подбор пароля. */
-    private static final int ITERATIONS = 210_000;
+    private static final int ITERATIONS = 600_000;
 
     /** Длина получаемого ключа в битах. */
     private static final int KEY_LENGTH = 256;
