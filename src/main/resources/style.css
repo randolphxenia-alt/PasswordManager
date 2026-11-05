@@ -1,0 +1,584 @@
+/* =====================================================================
+   Password Manager — тема оформления
+   Палитра: фон #1E1E1E, акцент #7ED9B5, текст #FFFFFF
+   ===================================================================== */
+
+.root {
+    -pm-bg: #1E1E1E;
+    -pm-surface: #252525;
+    -pm-surface-raised: #2D2D2D;
+    -pm-border: #383838;
+    -pm-text: #FFFFFF;
+    -pm-muted: #9A9A9A;
+    -pm-accent: #7ED9B5;
+    -pm-accent-hover: #98E3C6;
+    -pm-accent-pressed: #66C29E;
+    -pm-accent-soft: rgba(126, 217, 181, 0.14);
+    -pm-danger: #FF6B6B;
+    -pm-danger-soft: rgba(255, 107, 107, 0.14);
+
+    -fx-base: #2D2D2D;
+    -fx-background: #1E1E1E;
+    -fx-control-inner-background: #2D2D2D;
+    -fx-accent: #7ED9B5;
+    -fx-focus-color: #7ED9B5;
+    -fx-faint-focus-color: transparent;
+
+    -fx-background-color: -pm-bg;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+}
+
+/* ---------- Текст ---------- */
+
+.label {
+    -fx-text-fill: -pm-text;
+}
+
+.muted {
+    -fx-text-fill: -pm-muted;
+}
+
+.text-danger {
+    -fx-text-fill: -pm-danger;
+}
+
+.hint {
+    -fx-text-fill: -pm-muted;
+    -fx-font-size: 12.5px;
+}
+
+.field-caption {
+    -fx-text-fill: -pm-muted;
+    -fx-font-size: 12.5px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Иконки ---------- */
+
+.icon {
+    -fx-fill: transparent;
+    -fx-stroke: -pm-text;
+    -fx-stroke-width: 2;
+    -fx-stroke-line-cap: round;
+    -fx-stroke-line-join: round;
+}
+
+/* ---------- Кнопки ---------- */
+
+.button {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 9 18 9 18;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+    -fx-background-insets: 0;
+}
+
+.button-primary {
+    -fx-background-color: -pm-accent;
+    -fx-text-fill: -pm-bg;
+    -fx-font-weight: bold;
+}
+
+.button-primary:hover,
+.button-primary:focused {
+    -fx-background-color: -pm-accent-hover;
+}
+
+.button-primary:pressed {
+    -fx-background-color: -pm-accent-pressed;
+}
+
+.button-primary .icon {
+    -fx-stroke: -pm-bg;
+}
+
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-border-color: -pm-border;
+    -fx-text-fill: -pm-text;
+}
+
+.button-secondary:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+}
+
+.button-secondary:focused {
+    -fx-border-color: -pm-accent;
+}
+
+.button-danger {
+    -fx-background-color: -pm-danger;
+    -fx-text-fill: -pm-bg;
+    -fx-font-weight: bold;
+}
+
+.button-danger:hover,
+.button-danger:focused {
+    -fx-background-color: #FF8585;
+}
+
+.button-danger .icon {
+    -fx-stroke: -pm-bg;
+}
+
+.button-large {
+    -fx-padding: 12 18 12 18;
+    -fx-font-size: 15px;
+}
+
+.button-small {
+    -fx-padding: 4 10 4 10;
+    -fx-font-size: 12.5px;
+    -fx-graphic-text-gap: 6;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-padding: 6;
+}
+
+.icon-button .icon {
+    -fx-stroke: -pm-muted;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+}
+
+.icon-button:hover .icon,
+.icon-button:focused .icon {
+    -fx-stroke: -pm-text;
+}
+
+.icon-button-danger:hover {
+    -fx-background-color: -pm-danger-soft;
+}
+
+.icon-button-danger:hover .icon {
+    -fx-stroke: -pm-danger;
+}
+
+.hyperlink {
+    -fx-text-fill: -pm-accent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: -pm-accent;
+}
+
+/* ---------- Поля ввода ---------- */
+
+.text-field,
+.password-field,
+.input-shell {
+    -fx-background-color: -pm-surface-raised;
+    -fx-background-radius: 8;
+    -fx-border-color: -pm-border;
+    -fx-border-radius: 8;
+}
+
+.text-field,
+.password-field {
+    -fx-text-fill: -pm-text;
+    -fx-prompt-text-fill: #6E6E6E;
+    -fx-highlight-fill: -pm-accent;
+    -fx-highlight-text-fill: -pm-bg;
+    -fx-padding: 10 12 10 12;
+}
+
+.text-field:focused,
+.password-field:focused,
+.input-shell:focus-within {
+    -fx-border-color: -pm-accent;
+}
+
+.input-shell {
+    -fx-padding: 0 4 0 0;
+}
+
+.input-shell .text-field,
+.input-shell .password-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.search-box {
+    -fx-padding: 0 4 0 12;
+    -fx-pref-width: 320;
+}
+
+.search-box .icon {
+    -fx-stroke: -pm-muted;
+}
+
+.combo-box {
+    -fx-background-color: -pm-surface-raised;
+    -fx-background-radius: 8;
+    -fx-border-color: -pm-border;
+    -fx-border-radius: 8;
+    -fx-padding: 4 4 4 4;
+}
+
+.combo-box:focused,
+.combo-box:showing {
+    -fx-border-color: -pm-accent;
+}
+
+.combo-box > .list-cell {
+    -fx-text-fill: -pm-text;
+    -fx-background-color: transparent;
+}
+
+.combo-box > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box > .arrow-button > .arrow {
+    -fx-background-color: -pm-muted;
+}
+
+.combo-box-popup > .list-view {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 8;
+    -fx-border-color: #383838;
+    -fx-border-radius: 8;
+    -fx-padding: 4;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 8 12 8 12;
+    -fx-background-radius: 6;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
+    -fx-background-color: rgba(126, 217, 181, 0.18);
+    -fx-text-fill: #7ED9B5;
+}
+
+/* ---------- Сообщения ---------- */
+
+.message {
+    -fx-padding: 9 12 9 12;
+    -fx-background-radius: 8;
+    -fx-graphic-text-gap: 8;
+    -fx-font-size: 13px;
+}
+
+.message-error {
+    -fx-background-color: -pm-danger-soft;
+    -fx-text-fill: -pm-danger;
+}
+
+.message-error .icon {
+    -fx-stroke: -pm-danger;
+}
+
+.message-success {
+    -fx-background-color: -pm-accent-soft;
+    -fx-text-fill: -pm-accent;
+}
+
+.message-success .icon {
+    -fx-stroke: -pm-accent;
+}
+
+.toast {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 12 18 12 16;
+    -fx-graphic-text-gap: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 24, 0.2, 0, 6);
+}
+
+.toast-success {
+    -fx-border-color: -pm-accent;
+}
+
+.toast-success .icon {
+    -fx-stroke: -pm-accent;
+}
+
+.toast-error {
+    -fx-border-color: -pm-danger;
+}
+
+.toast-error .icon {
+    -fx-stroke: -pm-danger;
+}
+
+.tooltip {
+    -fx-background-color: #3A3A3A;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10 6 10;
+}
+
+/* ---------- Экран входа ---------- */
+
+.auth-background {
+    -fx-background-color: radial-gradient(center 50% 0%, radius 85%, #24332D 0%, #1E1E1E 100%);
+}
+
+.auth-card {
+    -fx-background-color: -pm-surface;
+    -fx-background-radius: 16;
+    -fx-border-color: -pm-border;
+    -fx-border-radius: 16;
+    -fx-padding: 36 36 28 36;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 32, 0.15, 0, 10);
+}
+
+.logo-badge {
+    -fx-background-color: -pm-accent-soft;
+    -fx-background-radius: 16;
+    -fx-padding: 14;
+}
+
+.logo-badge .icon {
+    -fx-stroke: -pm-accent;
+}
+
+.auth-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.auth-subtitle {
+    -fx-text-fill: -pm-muted;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Главный экран ---------- */
+
+.toolbar {
+    -fx-background-color: -pm-surface;
+    -fx-border-color: transparent transparent -pm-border transparent;
+    -fx-padding: 12 24 12 24;
+}
+
+.brand-badge {
+    -fx-background-color: -pm-accent;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+}
+
+.brand-badge .icon {
+    -fx-stroke: -pm-bg;
+}
+
+.brand-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.user-chip {
+    -fx-background-color: -pm-surface-raised;
+    -fx-background-radius: 999;
+    -fx-padding: 6 14 6 10;
+    -fx-graphic-text-gap: 8;
+}
+
+.user-chip .icon {
+    -fx-stroke: -pm-accent;
+}
+
+.section-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.cards-scroll,
+.cards-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.cards-scroll,
+.cards-scroll:focused {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
+.cards-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .thumb {
+    -fx-background-color: #464646;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar > .thumb:hover {
+    -fx-background-color: #5A5A5A;
+}
+
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.empty-badge {
+    -fx-background-color: -pm-surface;
+    -fx-background-radius: 20;
+    -fx-padding: 18;
+}
+
+.empty-badge .icon {
+    -fx-stroke: #5A5A5A;
+}
+
+.empty-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Карточка записи ---------- */
+
+.entry-card {
+    -fx-background-color: -pm-surface;
+    -fx-background-radius: 12;
+    -fx-border-color: -pm-border;
+    -fx-border-radius: 12;
+    -fx-padding: 18 18 12 18;
+}
+
+.entry-card:hover {
+    -fx-border-color: rgba(126, 217, 181, 0.55);
+}
+
+.avatar {
+    -fx-background-color: -pm-accent-soft;
+    -fx-background-radius: 10;
+    -fx-min-width: 42;
+    -fx-min-height: 42;
+    -fx-max-width: 42;
+    -fx-max-height: 42;
+}
+
+.avatar-letter {
+    -fx-text-fill: -pm-accent;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.card-subtitle {
+    -fx-text-fill: -pm-muted;
+    -fx-font-size: 12.5px;
+    -fx-graphic-text-gap: 5;
+}
+
+.card-subtitle .icon {
+    -fx-stroke: -pm-muted;
+}
+
+.value {
+    -fx-font-size: 14px;
+}
+
+.password-value {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 14.5px;
+}
+
+.card-footer {
+    -fx-border-color: -pm-border transparent transparent transparent;
+    -fx-padding: 10 0 0 0;
+}
+
+.badge {
+    -fx-background-radius: 999;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.badge-reversible {
+    -fx-background-color: -pm-accent-soft;
+    -fx-text-fill: -pm-accent;
+}
+
+.badge-hash {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #C9C9C9;
+}
+
+/* ---------- Модальные окна ---------- */
+
+.modal-backdrop {
+    -fx-background-color: rgba(0, 0, 0, 0.62);
+}
+
+.modal-card {
+    -fx-background-color: -pm-surface;
+    -fx-background-radius: 14;
+    -fx-border-color: -pm-border;
+    -fx-border-radius: 14;
+    -fx-padding: 24 26 24 26;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.55), 40, 0.2, 0, 12);
+}
+
+.dialog-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.dialog-message {
+    -fx-text-fill: #C9C9C9;
+    -fx-line-spacing: 2;
+}
+
+.dialog-icon {
+    -fx-background-color: -pm-accent-soft;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+}
+
+.dialog-icon .icon {
+    -fx-stroke: -pm-accent;
+}
+
+.dialog-icon-danger {
+    -fx-background-color: -pm-danger-soft;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+}
+
+.dialog-icon-danger .icon {
+    -fx-stroke: -pm-danger;
+}
