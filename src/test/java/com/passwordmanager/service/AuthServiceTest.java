@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/** Интеграционные тесты регистрации и входа (с временной БД SQLite). */
+
 class AuthServiceTest extends DatabaseTestBase {
 
-    /** Тестируемый сервис. */
+
     private final AuthService authService = new AuthService();
 
-    /**
-     * После регистрации пользователь может войти.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Регистрация + вход")
     void registerAndLogin() throws AppException {
@@ -26,11 +26,11 @@ class AuthServiceTest extends DatabaseTestBase {
         assertEquals("nikita", user.username());
     }
 
-    /**
-     * Пробелы вокруг имени не мешают входу.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Пробелы вокруг имени игнорируются")
     void usernameIsTrimmed() throws AppException {
@@ -38,11 +38,11 @@ class AuthServiceTest extends DatabaseTestBase {
         assertEquals("nikita", authService.login("nikita ", "secret1").username());
     }
 
-    /**
-     * Повторная регистрация того же имени отклоняется.
-     *
-     * @throws AppException при ошибке первой регистрации
-     */
+
+
+
+
+
     @Test
     @DisplayName("Повторная регистрация → ошибка")
     void duplicateRegistration() throws AppException {
@@ -52,11 +52,11 @@ class AuthServiceTest extends DatabaseTestBase {
         assertEquals("Пользователь «nikita» уже существует", error.getMessage());
     }
 
-    /**
-     * Неверный пароль и неизвестный пользователь дают одинаковое сообщение.
-     *
-     * @throws AppException при ошибке регистрации
-     */
+
+
+
+
+
     @Test
     @DisplayName("Неверный пароль / неизвестный пользователь → одинаковая ошибка")
     void invalidCredentials() throws AppException {
@@ -67,7 +67,7 @@ class AuthServiceTest extends DatabaseTestBase {
         assertEquals(AuthService.INVALID_CREDENTIALS, unknownUser.getMessage());
     }
 
-    /** Пустые поля при входе отклоняются без обращения к БД. */
+
     @Test
     @DisplayName("Пустые поля при входе → ошибка")
     void emptyLogin() {

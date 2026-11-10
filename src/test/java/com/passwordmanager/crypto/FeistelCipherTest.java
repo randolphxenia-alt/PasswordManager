@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/** Тесты шифра Фейстеля. */
+
 class FeistelCipherTest {
 
-    /** Ключ, используемый в тестах. */
+
     private static final String KEY = "secret-key";
 
-    /**
-     * Расшифрование возвращает исходный текст для строк разной длины и алфавита.
-     *
-     * @param text исходный текст
-     */
+
+
+
+
+
     @ParameterizedTest
     @ValueSource(strings = {"", "a", "ab", "Password123!", "Привет, мир!", "😀 emoji"})
     @DisplayName("encrypt → decrypt возвращает исходный текст")
@@ -28,14 +28,14 @@ class FeistelCipherTest {
         Assertions.assertEquals(text, FeistelCipher.decrypt(FeistelCipher.encrypt(text, KEY), KEY));
     }
 
-    /** Шифртекст отличается от открытого текста. */
+
     @Test
     @DisplayName("Шифртекст не совпадает с открытым текстом")
     void cipherTextDiffersFromPlainText() {
         assertNotEquals("Password123!", FeistelCipher.encrypt("Password123!", KEY));
     }
 
-    /** Расшифрование другим ключом не даёт исходный текст. */
+
     @Test
     @DisplayName("Другой ключ не расшифровывает данные")
     void wrongKeyGivesDifferentText() {
@@ -43,7 +43,7 @@ class FeistelCipherTest {
         assertNotEquals("Password123!", FeistelCipher.decrypt(cipher, "other-key"));
     }
 
-    /** Пустой ключ отклоняется. */
+
     @Test
     @DisplayName("Пустой ключ → CryptoException")
     void emptyKeyRejected() {
@@ -51,7 +51,7 @@ class FeistelCipherTest {
         assertThrows(CryptoException.class, () -> FeistelCipher.encrypt("text", null));
     }
 
-    /** Повреждённый шифртекст отклоняется. */
+
     @Test
     @DisplayName("Повреждённые данные → CryptoException")
     void corruptedDataRejected() {

@@ -18,23 +18,23 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Интеграционные тесты работы с записями (с временной БД SQLite). */
+
 class PasswordEntryServiceTest extends DatabaseTestBase {
 
-    /** Пароль, используемый в тестовых записях. */
+
     private static final String PASSWORD = "P@ssw0rd";
 
-    /** Тестируемый сервис. */
+
     private final PasswordEntryService entryService = new PasswordEntryService();
 
-    /** Владелец записей. */
+
     private User owner;
 
-    /**
-     * Регистрирует пользователя-владельца перед каждым тестом.
-     *
-     * @throws AppException при ошибке регистрации
-     */
+
+
+
+
+
     @BeforeEach
     void createOwner() throws AppException {
         AuthService authService = new AuthService();
@@ -42,12 +42,12 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         owner = authService.login("owner", "secret1");
     }
 
-    /**
-     * Обратимые способы: пароль виден после чтения.
-     *
-     * @param mode способ защиты
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
+
     @ParameterizedTest
     @EnumSource(value = StorageMode.class, names = {"BASE64", "FEISTEL"})
     @DisplayName("Обратимые способы: пароль восстанавливается")
@@ -57,12 +57,12 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertEquals(PASSWORD, entry.data().password());
     }
 
-    /**
-     * Хеш-способы: пароль не виден, но проверяется.
-     *
-     * @param mode способ защиты
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
+
     @ParameterizedTest
     @EnumSource(value = StorageMode.class, names = {"MD5", "SALTED_HASH"})
     @DisplayName("Хеш-способы: пароль скрыт, но проверяется")
@@ -73,11 +73,11 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertFalse(entryService.verifyPassword(owner.id(), entry.id(), "wrong"));
     }
 
-    /**
-     * Поиск фильтрует по названию, сайту и логину без учёта регистра; результат отсортирован.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Поиск и сортировка (StreamAPI)")
     void searchAndSort() throws AppException {
@@ -92,11 +92,11 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertTrue(entryService.findEntries(owner.id(), "нет такого").isEmpty());
     }
 
-    /**
-     * Пустой пароль при изменении сохраняет прежний, смена способа перешифровывает его.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Изменение: пустой пароль сохраняет прежний, смена способа перешифровывает")
     void updateKeepsAndReencryptsPassword() throws AppException {
@@ -108,11 +108,11 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertEquals(PASSWORD, updated.data().password());
     }
 
-    /**
-     * Сменить способ у хеш-пароля без ввода нового пароля нельзя.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Изменение: хеш-пароль нельзя перешифровать без ввода")
     void hashedPasswordNeedsNewValueToChangeMode() throws AppException {
@@ -121,11 +121,11 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
                 new EntryData("Hashed", "", "login", "", StorageMode.BASE64)));
     }
 
-    /**
-     * Удаление записи и попытка удалить несуществующую.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Удаление записи; повторное удаление → ошибка")
     void delete() throws AppException {
@@ -135,11 +135,11 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertThrows(AppException.class, () -> entryService.deleteEntry(owner.id(), id));
     }
 
-    /**
-     * Пользователь не видит, не проверяет и не удаляет чужие записи.
-     *
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
     @Test
     @DisplayName("Чужие записи недоступны")
     void entriesAreIsolatedByUser() throws AppException {
@@ -150,7 +150,7 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
         assertThrows(AppException.class, () -> entryService.verifyPassword(strangerId, id, PASSWORD));
     }
 
-    /** Некорректная запись не сохраняется. */
+
     @Test
     @DisplayName("Некорректная запись отклоняется")
     void invalidEntryRejected() {
@@ -158,25 +158,25 @@ class PasswordEntryServiceTest extends DatabaseTestBase {
                 new EntryData("   ", "", "login", PASSWORD, StorageMode.FEISTEL)));
     }
 
-    /**
-     * Добавляет запись и возвращает её в прочитанном виде.
-     *
-     * @param title название
-     * @param mode  способ защиты
-     * @return прочитанная запись
-     * @throws AppException при ошибке сервиса
-     */
+
+
+
+
+
+
+
+
     private DecryptedEntry addAndLoad(String title, StorageMode mode) throws AppException {
         entryService.addEntry(owner.id(), new EntryData(title, "site.ru", "login", PASSWORD, mode));
         return entryService.findEntries(owner.id(), title).get(0);
     }
 
-    /**
-     * Извлекает названия записей.
-     *
-     * @param entries записи
-     * @return список названий
-     */
+
+
+
+
+
+
     private static List<String> titles(List<DecryptedEntry> entries) {
         return entries.stream().map(entry -> entry.data().title()).toList();
     }

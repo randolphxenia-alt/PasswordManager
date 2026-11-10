@@ -10,45 +10,22 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
-/**
- * Регистрация и вход пользователей.
- * <p>
- * Мастер-пароль всегда хранится в одном защищённом формате — PBKDF2-HMAC-SHA256
- * со случайной солью (см. {@link PasswordHasher}); пользователь формат не выбирает.
- */
 public class AuthService {
 
-    /** Сообщение при неверной паре «логин — пароль» (одинаковое, чтобы не раскрывать, что именно неверно). */
     static final String INVALID_CREDENTIALS = "Неверное имя пользователя или пароль";
 
-    /** Логгер класса. */
     private static final Logger log = LogManager.getLogger(AuthService.class);
 
-    /** DAO пользователей. */
     private final UserDAO userDAO;
 
-    /** Создаёт сервис с DAO по умолчанию. */
     public AuthService() {
         this(new UserDAO());
     }
 
-    /**
-     * Создаёт сервис с указанным DAO (используется в тестах).
-     *
-     * @param userDAO DAO пользователей
-     */
     public AuthService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
-    /**
-     * Регистрирует нового пользователя.
-     *
-     * @param username     имя пользователя
-     * @param password     мастер-пароль
-     * @param confirmation повтор мастер-пароля
-     * @throws AppException если данные некорректны, имя занято или БД недоступна
-     */
     public void register(String username, String password, String confirmation) throws AppException {
         String name = InputValidator.normalize(username);
         InputValidator.validateRegistration(name, password, confirmation);
@@ -62,14 +39,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * Выполняет вход.
-     *
-     * @param username имя пользователя
-     * @param password мастер-пароль
-     * @return вошедший пользователь
-     * @throws AppException если пара «логин — пароль» неверна или БД недоступна
-     */
     public User login(String username, String password) throws AppException {
         String name = InputValidator.normalize(username);
         if (name.isEmpty() || password == null || password.isEmpty()) {
@@ -86,13 +55,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * Проверяет, что имя пользователя не занято.
-     *
-     * @param username имя пользователя
-     * @throws AppException если имя занято
-     * @throws SQLException при ошибке БД
-     */
     private void ensureUsernameFree(String username) throws AppException, SQLException {
         if (userDAO.exists(username)) {
             log.warn("Попытка регистрации существующего пользователя: {}", username);
@@ -100,14 +62,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * Загружает учётные данные пользователя.
-     *
-     * @param username имя пользователя
-     * @return учётные данные
-     * @throws AppException если пользователь не найден
-     * @throws SQLException при ошибке БД
-     */
     private UserCredentials findCredentials(String username) throws AppException, SQLException {
         return userDAO.findByUsername(username).orElseThrow(() -> {
             log.warn("Вход: пользователь не найден: {}", username);
@@ -115,13 +69,6 @@ public class AuthService {
         });
     }
 
-    /**
-     * Сверяет введённый пароль с сохранённым хешем.
-     *
-     * @param credentials учётные данные из БД
-     * @param password    введённый пароль
-     * @throws AppException если пароль неверный
-     */
     private void verifyPassword(UserCredentials credentials, String password) throws AppException {
         if (!PasswordHasher.verify(password, credentials.passwordHash())) {
             log.warn("Вход: неверный пароль для {}", credentials.username());

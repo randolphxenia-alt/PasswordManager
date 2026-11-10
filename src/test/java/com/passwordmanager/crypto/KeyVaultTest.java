@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-/** Тесты защищённого хранилища ключей. */
+
 class KeyVaultTest {
 
-    /** Ключи расшифровываются, не пустые и различаются. */
+
     @Test
     @DisplayName("Ключи расшифровываются и различаются")
     void keysAreRestored() {
@@ -20,7 +20,7 @@ class KeyVaultTest {
         assertNotEquals(KeyVault.feistelKey(), KeyVault.saltPepper());
     }
 
-    /** Ключ при каждом обращении одинаковый — иначе ранее зашифрованные данные не расшифровать. */
+
     @Test
     @DisplayName("Ключ Фейстеля стабилен между обращениями")
     void keysAreStable() {

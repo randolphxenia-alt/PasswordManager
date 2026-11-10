@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Логирование одновременно в консоль и в файл logs/app.log (с ротацией).
-     Консоль: кодировка берётся из системного свойства stdout.encoding (кодировка текущей консоли),
-     поэтому кириллица читается без chcp; если свойства нет (Java 17) — UTF-8.
-     Файл: всегда UTF-8. -->
 <Configuration status="WARN">
     <Properties>
         <Property name="LOG_DIR">logs</Property>

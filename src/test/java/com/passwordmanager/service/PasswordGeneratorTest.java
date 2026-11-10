@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Тесты генератора паролей. */
+
 class PasswordGeneratorTest {
 
-    /** Пароль имеет нужную длину и содержит все группы символов. */
+
     @Test
     @DisplayName("Пароль нужной длины со всеми группами символов")
     void generatedPasswordIsStrong() {
@@ -23,7 +23,7 @@ class PasswordGeneratorTest {
         assertTrue(PasswordGenerator.containsAllGroups(password));
     }
 
-    /** Пароли не повторяются. */
+
     @Test
     @DisplayName("100 сгенерированных паролей не повторяются")
     void passwordsAreUnique() {
@@ -33,7 +33,7 @@ class PasswordGeneratorTest {
         assertEquals(100, passwords.size());
     }
 
-    /** Недопустимая длина отклоняется. */
+
     @Test
     @DisplayName("Слишком короткий или длинный пароль → ошибка")
     void invalidLength() {

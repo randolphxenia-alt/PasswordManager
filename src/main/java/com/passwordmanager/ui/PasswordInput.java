@@ -10,30 +10,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-
-/**
- * Поле ввода пароля с кнопкой «показать / скрыть».
- * Внутри два поля (скрытое и открытое) с общим текстом; видно только одно из них.
- */
 public final class PasswordInput {
-
-    /** Поле со скрытыми символами. */
     private final PasswordField hiddenField = new PasswordField();
-
-    /** Поле с видимым текстом. */
     private final TextField visibleField = new TextField();
-
-    /** Кнопка переключения видимости. */
     private final Button toggleButton;
-
-    /** Внешний контейнер поля. */
     private final HBox root;
-
-    /**
-     * Создаёт поле ввода пароля.
-     *
-     * @param prompt подсказка внутри пустого поля
-     */
     public PasswordInput(String prompt) {
         hiddenField.textProperty().bindBidirectional(visibleField.textProperty());
         setPromptText(prompt);
@@ -46,69 +27,29 @@ public final class PasswordInput {
         root.getStyleClass().add("input-shell");
         UiFactory.trackFocusWithin(root, hiddenField, visibleField);
     }
-
-    /**
-     * Возвращает узел для размещения на экране.
-     *
-     * @return корневой узел поля
-     */
     public Node getNode() {
         return root;
     }
-
-    /**
-     * Возвращает введённый пароль.
-     *
-     * @return текст поля
-     */
     public String getText() {
         return hiddenField.getText();
     }
-
-    /**
-     * Устанавливает пароль.
-     *
-     * @param text новый текст
-     */
     public void setText(String text) {
         hiddenField.setText(text);
     }
-
-    /** Переводит фокус ввода в поле пароля. */
     public void requestFocus() {
         (visibleField.isVisible() ? visibleField : hiddenField).requestFocus();
     }
-
-    /** Очищает поле. */
     public void clear() {
         hiddenField.clear();
     }
-
-    /**
-     * Устанавливает подсказку внутри пустого поля.
-     *
-     * @param prompt текст подсказки
-     */
     public void setPromptText(String prompt) {
         hiddenField.setPromptText(prompt);
         visibleField.setPromptText(prompt);
     }
-
-    /**
-     * Задаёт действие при нажатии Enter в поле.
-     *
-     * @param handler обработчик
-     */
     public void setOnAction(EventHandler<ActionEvent> handler) {
         hiddenField.setOnAction(handler);
         visibleField.setOnAction(handler);
     }
-
-    /**
-     * Показывает или скрывает символы пароля.
-     *
-     * @param revealed {@code true} — показать
-     */
     public void setRevealed(boolean revealed) {
         boolean hadFocus = hiddenField.isFocused() || visibleField.isFocused();
         visibleField.setVisible(revealed);
@@ -121,8 +62,6 @@ public final class PasswordInput {
             active.end();
         }
     }
-
-    /** Переключает видимость символов пароля. */
     private void toggleVisibility() {
         setRevealed(!visibleField.isVisible());
     }
